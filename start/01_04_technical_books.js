@@ -24,10 +24,28 @@ class Book {
   sell(numCopiesSold = 1) {
     this.numCopies -= numCopiesSold;
   }
-  
+
   restock(numCopiesStocked = 5) {
     this.numCopies += numCopiesStocked;
   }
 }
 
-// Write your code here
+class TechBook extends Book {
+  constructor(title, author, ISBN, numCopies, edition) {
+    super(title, author, ISBN, numCopies);
+    this.edition = edition;
+  }
+
+  getEdition() {
+    return `The current version of this book is followed by book's edition ${this.edition}`;
+  }
+}
+
+const HungerGames = new TechBook(
+  "Hunger Games",
+  "Suzanne Collins",
+  123919,
+  5,
+  69
+);
+console.log(HungerGames.getEdition());
