@@ -1,23 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Five Friends</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Five Friends</title>
-</head>
+  <body>
+    <!-- To run this file right click the file in the navigation bar and select "Open with live server. Then open the developer tools in the browser and head to the console window."-->
 
-<body>
-  <!-- To run this file right click the file in the navigation bar and select "Open with live server. Then open the developer tools in the browser and head to the console window."-->
+    <!-- Use this element to generate your friends -->
+    <div id="timeline"></div>
 
-  <!-- Use this element to generate your friends -->
-  <div id="timeline"></div>
+    <script>
+      async function getUsers() {
+        const response = await fetch("https://randomuser.me/api/?results=5");
+        const users = await response.json();
+        let wrap = document.getElementById("timeline");
+        wrap.insertAdjacentHTML("beforeend", userTmp(users.results));
+      }
 
-  <script>
-    // Write your code here
-    
-  </script>
-</body>
-
+      function userTmp(users) {
+        console.log(users);
+        return users
+          .map((user) => {
+            return `<img src="${user.picture.thumbnail}" alt="${user.name.first}"/> <h3>${user.name.title} ${user.name.first} ${user.name.last}</h3>`;
+          })
+          .join("");
+      }
+      getUsers();
+    </script>
+  </body>
 </html>
